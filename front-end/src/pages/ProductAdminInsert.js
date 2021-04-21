@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SideBarAdmin from '../components/SideBarAdmin/SideBarAdmin';
 // import { hanldeRegisterProduct, handleChange } from '../services/productInsert';
+import { createNewProduct } from '../services/api';
 import './ProductAdminInsert.css';
 
 function ProductAdminInsert() {
