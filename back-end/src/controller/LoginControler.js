@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const rescue = require('express-rescue');
 const LoginService = require('../service/LoginService');
 const createToken = require('../authentication/createToken');
 
@@ -7,7 +8,7 @@ const router = new Router();
 const OK = 200;
 const BAD_REQUEST = 404;
 
-router.post('/', async (req, res) => {
+router.post('/', rescue(async (req, res) => {
   try {
     const user = req.body;
     const { role, email, name, password } = await LoginService.getByEmail(user.email);
@@ -22,6 +23,6 @@ router.post('/', async (req, res) => {
   } catch (error) {
     return res.status(BAD_REQUEST).json({ message: 'User not found or wrong email' });
   }
-});
+}));
 
 module.exports = router;
