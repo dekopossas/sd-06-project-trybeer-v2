@@ -34,7 +34,7 @@ function AdminOrdersDetails(props) {
                 <h2 data-testid="order-status" className={ orders.status }>
                   {orders.status}
                 </h2>
-                {orders.products.map((order, index) => (
+                {orders.map((order, index) => (
                   <div key={ index }>
                     <h3 data-testid={ `${index}-product-qtd` }>
                       {`${order.quantity}`}
