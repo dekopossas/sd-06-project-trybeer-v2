@@ -11,7 +11,7 @@ import ClientProfile from './pages/ClientProfile';
 import Orders from './pages/Orders';
 import AdminOrdersDetails from './pages/AdminOrdersDetails';
 import OrderDetails from './pages/OrderDetails';
-// import ProductAdminInsert from './pages/ProductAdminInsert';
+import ProductAdminInsert from './pages/ProductAdminInsert';
 import './App.css';
 
 function App() {
