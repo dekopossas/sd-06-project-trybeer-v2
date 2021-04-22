@@ -7,8 +7,6 @@ module.exports = {
       email: { type: Sequelize.STRING },
       password: { type: Sequelize.STRING },
       role: { type: Sequelize.STRING },
-      createdAt: { allowNull: false, type: Sequelize.DATE },
-      updatedAt: { allowNull: false, type: Sequelize.DATE },
     });
   },
   down: async (queryInterface, _Sequelize) => {
