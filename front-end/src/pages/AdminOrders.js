@@ -13,6 +13,7 @@ function AdminOrders() {
   const history = useHistory();
 
   useEffect(() => {
+    console.log(sales);
     getAllSales()
       .then((salesAPI) => setSales(salesAPI));
   }, []);
