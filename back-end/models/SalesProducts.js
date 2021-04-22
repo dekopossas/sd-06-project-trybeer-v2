@@ -1,9 +1,7 @@
-const SalesProductsModel = (sequelize, DataTypes) => {
+const SalesProductsModel = (sequelize, Datatypes) => {
   const SalesProducts = sequelize.define('sales_products', {
-    saleId: DataTypes.INTEGER,
-    productId: DataTypes.INTEGER,
-    quantity: DataTypes.INTEGER,
-  });
+    quantity: Datatypes.STRING,
+  }, { timestamps: false });
 
   return SalesProducts;
 };

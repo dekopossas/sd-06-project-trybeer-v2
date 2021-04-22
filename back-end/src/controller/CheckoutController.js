@@ -12,10 +12,7 @@ router.post('/', rescue(async (req, res) => {
     const { cart, userEmail, totalPrice, status, rua, numero } = req.body;
     const { id: userId } = await users.findOne({ where: { email: userEmail } });
     const newProducts = await products.findAll();
-    const newCart = cart.map((product) => {
-      const newProduct = newProducts.find((newP) => product.name === newP.name);
-      return { id: newProduct.id, quantity: product.quantity };
-    });
+
     const { id: saleId } = await sales.create({
       userId,
       totalPrice: totalPrice.replace(',', '.'),
@@ -23,9 +20,14 @@ router.post('/', rescue(async (req, res) => {
       deliveryNumber: numero,
       status,
     });
-    console.log(saleId);
-    const saleProduct = newCart.map((element) => ({ saleId, ...element }));
-    await salesProducts.create(saleProduct);
+
+    const newCart = cart.map((product) => {
+      const newProduct = newProducts.find((newP) => product.name === newP.name);
+      return { saleId, productId: newProduct.id, quantity: product.quantity };
+    });
+
+    await salesProducts.bulkCreate(newCart);
+
     return res.status(OK).json({ message: 'Sales success' });
 }));
 
