@@ -9,7 +9,7 @@ import SideBarAdmin from '../components/SideBarAdmin/SideBarAdmin';
 import './Admin.css';
 
 function AdminOrders() {
-  const { sales, setSales } = useContext(TrybeerContext);
+  const [ sales, setSales ] = useContext(TrybeerContext);
   const history = useHistory();
 
   useEffect(() => {
