@@ -1,11 +1,11 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
-const { sales, products } = require('../../models');
+const { sales } = require('../../models');
 
 const router = new Router();
 
 const OK = 200;
-const BAD_REQUEST = 404;
+// const BAD_REQUEST = 404;
 
 router.get('/', rescue(async (_req, res) => {
   const sale = await sales.findAll();

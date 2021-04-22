@@ -18,7 +18,7 @@ function AdminOrdersDetails(props) {
     getOrder(id).then((result) => setOrders(result));
   }, [delivered]);
 
-  console.log(orders.length)
+  console.log(orders.length);
 
   return (
     <div className="div-main">

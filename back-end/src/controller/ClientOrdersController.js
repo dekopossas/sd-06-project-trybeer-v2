@@ -35,11 +35,8 @@ router.get('/:id', rescue(async (req, res) => {
             model: products,
             as: 'products',
             through: { attributes: ['quantity'] },
-          },
-        ]
-      },
+          }] },
     );
-
     console.log(orders);
 
     return res.status(OK).json(orders);
