@@ -10,58 +10,60 @@ const {
 
 function Login() {
   const { user, setUser } = useContext(TrybeerContext);
-  const [enableButton, setEnableButton] = useState(false);
+  // const [enableButton, setEnableButton] = useState(false);
   const history = useHistory();
   localStorage.clear();
   return (
-    <form>
-      <div className="divLogin">
-        <label htmlFor="email-input">
-          Email
+    <>
+      <form>
+        <div className="divLogin">
+          <label htmlFor="email-input">
+            Email
           <br />
-          <input
-            className="inputLogin"
-            id="email-input"
-            type="email"
-            name="email"
-            data-testid="email-input"
-            onChange={ () => userValidation(user, setUser, setEnableButton) }
-          />
-        </label>
-      </div>
-      <div className="divLogin">
-        <label htmlFor="password-input">
-          Senha
+            <input
+              className="inputLogin"
+              id="email-input"
+              type="email"
+              name="email"
+              data-testid="email-input"
+              onChange={() => userValidation(user, setUser)}
+            />
+          </label>
+        </div>
+        <div className="divLogin">
+          <label htmlFor="password-input">
+            Senha
           <br />
-          <input
-            className="inputLogin"
-            id="password-input"
-            type="password"
-            data-testid="password-input"
-            onChange={ () => userValidation(user, setUser, setEnableButton) }
-          />
-        </label>
-      </div>
-      <div>
-        <button
-          className="buttonLogin"
-          disabled={ enableButton }
-          type="button"
-          data-testid="signin-btn"
-          onClick={ () => redirectPath(history, user) }
-        >
-          Entrar
+            <input
+              className="inputLogin"
+              id="password-input"
+              type="password"
+              data-testid="password-input"
+              onChange={() => userValidation(user, setUser)}
+            />
+          </label>
+        </div>
+        <div>
+          <button
+            className="buttonLogin"
+            // disabled={enableButton}
+            type="button"
+            data-testid="signin-btn"
+            onClick={() => redirectPath(history, user)}
+          >
+            Entrar
         </button>
-        <button
-          className="buttonLogin"
-          type="button"
-          data-testid="no-account-btn"
-          onClick={ () => handleUserNotRegistered(history) }
-        >
-          Ainda não tenho conta
+          <button
+            className="buttonLogin"
+            type="button"
+            data-testid="no-account-btn"
+            onClick={() => handleUserNotRegistered(history)}
+          >
+            Ainda não tenho conta
         </button>
-      </div>
-    </form>
+        </div>
+      </form>
+    </>
   );
 }
 
