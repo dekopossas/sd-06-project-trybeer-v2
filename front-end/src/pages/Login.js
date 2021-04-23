@@ -10,7 +10,7 @@ const {
 
 function Login() {
   const { user, setUser } = useContext(TrybeerContext);
-  const [enableButton, setEnableButton] = useState(true);
+  const [enableButton, setEnableButton] = useState(false);
   const history = useHistory();
   localStorage.clear();
   return (
