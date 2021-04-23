@@ -1,8 +1,6 @@
 import { getUserByEmail } from './api';
 
-export const userValidation = (user, setUser
-  // setEnableButton
-  ) => {
+export const userValidation = (user, setUser) => {
   const regexValidation = /\S+@\S+\.\S+/;
   const minimumCharacters = 6;
   const password = document.getElementById('password-input').value;

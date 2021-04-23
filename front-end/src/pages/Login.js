@@ -25,7 +25,7 @@ function Login() {
             type="email"
             name="email"
             data-testid="email-input"
-            onChange={() => userValidation(user, setUser)}
+            onChange={ () => userValidation(user, setUser) }
           />
         </label>
       </div>
@@ -38,7 +38,7 @@ function Login() {
             id="password-input"
             type="password"
             data-testid="password-input"
-            onChange={() => userValidation(user, setUser)}
+            onChange={ () => userValidation(user, setUser) }
           />
         </label>
       </div>
@@ -48,7 +48,7 @@ function Login() {
           // disabled={enableButton}
           type="button"
           data-testid="signin-btn"
-          onClick={() => redirectPath(history, user)}
+          onClick={ () => redirectPath(history, user) }
         >
           Entrar
         </button>
@@ -56,7 +56,7 @@ function Login() {
           className="buttonLogin"
           type="button"
           data-testid="no-account-btn"
-          onClick={() => handleUserNotRegistered(history)}
+          onClick={ () => handleUserNotRegistered(history) }
         >
           Ainda não tenho conta
         </button>
