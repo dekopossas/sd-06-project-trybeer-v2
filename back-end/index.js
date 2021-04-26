@@ -42,7 +42,7 @@ ioSocket.on('connection', (socket) => {
     const sentAt = moment().format('HH:mm');
     const chatData = { ...data, sentAt };
     console.log(chatData);
-    io.to(chatData.from).emit('chat.receiveMessage', chatData);
+    socket.to(chatData.from).emit('chat.receiveMessage', chatData);
   });
 });
 
