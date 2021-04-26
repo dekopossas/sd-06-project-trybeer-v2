@@ -34,6 +34,15 @@ function SideBarAdmin() {
           Inserir Produto
         </button>
       </Link>
+      <Link to="/admin/chats">
+        <button
+          type="button"
+          className="botoes"
+          data-testid="side-menu-item-chat"
+        >
+          Conversas
+        </button>
+      </Link>
       <Link to="/">
         <button
           type="button"

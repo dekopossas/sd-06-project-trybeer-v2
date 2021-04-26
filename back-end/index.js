@@ -1,9 +1,17 @@
 const express = require('express');
+
+const app = express();
 const cors = require('cors');
 const path = require('path');
 const moment = require('moment');
-const httpServer = require('http');
-const io = require('socket.io');
+const httpServer = require('http').createServer(app);
+const io = require('socket.io')(httpServer, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+  },
+});
+const Messages = require('./databases/mongodb/models/Messages');
 const LoginController = require('./src/controller/LoginControler');
 const UsersController = require('./src/controller/UsersController');
 const ProductsController = require('./src/controller/ProductsController');
@@ -11,38 +19,31 @@ const ProfileController = require('./src/controller/ProfileController');
 const SalesController = require('./src/controller/salesController');
 const CheckoutController = require('./src/controller/CheckoutController');
 const ClientOrdersController = require('./src/controller/ClientOrdersController');
+const MessagesController = require('./src/controller/MessagesController');
 
 const PORT = 3001;
-
-const app = express();
-const server = httpServer.createServer(app);
 
 app.use(express.json());
 app.use(cors());
 
-const ioSocket = io(server, {
-  cors: {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST'],
-  },
-});
-
-ioSocket.on('connection', (socket) => {
+io.on('connection', (socket) => {
   console.log('Usuário conectado');
 
   socket.on('connectRoom', (roomName) => {
     socket.join(roomName);
   });
 
-  socket.on('teste', (msg) => {
-    console.log(`Server recebe mensagem: ${msg}`);
+  socket.on('chat.historyRequest', async (nickname) => {
+    const historyMessages = await Messages.getByUser(nickname);
+    console.log('User historyMessages', historyMessages);
+    socket.emit('chat.historyUpdate', historyMessages);
   });
 
-  socket.on('chat.sendMessage', (data) => {
+  socket.on('chat.sendMessage', async (data) => {
     const sentAt = moment().format('HH:mm');
-    const chatData = { ...data, sentAt };
-    console.log(chatData);
-    socket.to(chatData.from).emit('chat.receiveMessage', chatData);
+    const newData = { ...data, sentAt };
+    await Messages.create(newData);
+    io.to(newData.nickname).emit('chat.receiveMessage', newData);
   });
 });
 
@@ -55,9 +56,10 @@ app.use('/profile', ProfileController);
 app.use('/admin/orders', SalesController);
 app.use('/checkout', CheckoutController);
 app.use('/orders', ClientOrdersController);
+app.use('/messages', MessagesController);
 
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500).json(err.message);
 });
 
-server.listen(PORT, console.log(`Experando Requisições na porta ${PORT}`));
+httpServer.listen(PORT, console.log(`Experando Requisições na porta ${PORT}`));
