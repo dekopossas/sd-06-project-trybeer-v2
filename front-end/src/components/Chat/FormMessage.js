@@ -9,7 +9,7 @@ function FormMessage() {
     const user = JSON.parse(localStorage.getItem('user'));
     const from = user.email;
     console.log(from);
-    socket.emit('chat.sendMessage', { message, from, dest });
+    socket.emit('chat.sendMessage', { message, from });
   };
 
   return (

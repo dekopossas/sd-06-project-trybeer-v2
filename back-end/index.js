@@ -20,14 +20,14 @@ const server = httpServer.createServer(app);
 app.use(express.json());
 app.use(cors());
 
-io(server, {
+const ioSocket = io(server, {
   cors: {
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST'],
   },
 });
 
-io.on('connection', (socket) => {
+ioSocket.on('connection', (socket) => {
   console.log('Usuário conectado');
 
   socket.on('connectRoom', (roomName) => {
@@ -60,4 +60,4 @@ app.use((err, _req, res, _next) => {
   res.status(err.status || 500).json(err.message);
 });
 
-httpServer.listen(PORT, console.log(`Experando Requisições na porta ${PORT}`));
+server.listen(PORT, console.log(`Experando Requisições na porta ${PORT}`));
